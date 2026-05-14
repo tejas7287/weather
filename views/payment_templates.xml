@@ -1,0 +1,42 @@
+<odoo>
+
+    <template id="payment_page_template">
+        <t t-call="web.layout">
+
+            <div class="container text-center mt-5">
+
+                <h2>Pay ₹ <t t-esc="order.amount_total"/></h2>
+
+                <button id="pay-btn" class="btn btn-success">
+                    Pay Now
+                </button>
+
+                <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+                <script>
+                    document.getElementById('pay-btn').onclick = function(){
+
+                        var options = {
+                            "key": "<t t-esc='key_id'/>",
+                            "amount": "<t t-esc='int(order.amount_total * 100)'/>",
+                            "currency": "INR",
+                            "name": "Odoo Payment",
+                            "order_id": "<t t-esc='order.razorpay_order_id'/>",
+
+                            "handler": function (response){
+                                window.location.href =
+                                "/razorpay/success?order_id=" + response.razorpay_order_id;
+                            }
+                        };
+
+                        var rzp = new Razorpay(options);
+                        rzp.open();
+                    }
+                </script>
+
+            </div>
+
+        </t>
+    </template>
+
+</odoo>

@@ -1,0 +1,90 @@
+<odoo>
+
+    <!-- ===================== -->
+    <!-- FORM VIEW ONLY -->
+    <!-- ===================== -->
+    <record id="view_weather_form" model="ir.ui.view">
+        <field name="name">weather.dashboard.form</field>
+        <field name="model">weather.dashboard</field>
+        <field name="arch" type="xml">
+            <form string="Weather Dashboard">
+                <sheet>
+
+                    <!-- HEADER -->
+                    <div style="text-align:center; margin-bottom:20px;">
+                        <h1 style="font-weight:600;">🌤 Weather Dashboard</h1>
+                    </div>
+
+                    <!-- INPUT SECTION -->
+                    <group>
+                        <field name="name" placeholder="Enter City (e.g. Bangalore)"
+                               class="oe_inline"/>
+
+                        <button name="fetch_weather"
+                                string="Get Weather"
+                                type="object"
+                                class="btn-primary"/>
+
+                        <button name="clear_data"
+                                string="Clear"
+                                type="object"
+                                class="btn-secondary"/>
+                    </group>
+
+                    <!-- RESULT CARD -->
+                    <group string="Result" col="1">
+                        <div style="padding:20px;
+                        border-radius:12px;
+                        background:#f5f5f5;
+                        text-align:center;">
+
+                            <div style="font-size:18px; font-weight:500;">
+                                <field name="name"/>
+                            </div>
+
+                            <div style="font-size:40px; font-weight:300; margin-top:10px;">
+                                <field name="temperature"/>°C
+                            </div>
+
+                            <div style="font-size:16px; color:#666;">
+                                <field name="description"/>
+                            </div>
+
+                            <div style="margin-top:10px; color:#999;">
+                                <field name="weather_info"/>
+                            </div>
+
+                        </div>
+                    </group>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <!-- ===================== -->
+    <!-- ACTION (FORM ONLY) -->
+    <!-- ===================== -->
+    <record id="action_weather_dashboard" model="ir.actions.act_window">
+        <field name="name">Weather Dashboard</field>
+        <field name="res_model">weather.dashboard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_weather_form"/>
+        <field name="target">current</field>
+    </record>
+
+
+    <!-- ===================== -->
+    <!-- MENU -->
+    <!-- ===================== -->
+    <menuitem id="menu_weather_root"
+              name="Weather"
+              sequence="10"/>
+
+    <menuitem id="menu_weather_sub"
+              name="My Dashboard"
+              parent="menu_weather_root"
+              action="action_weather_dashboard"/>
+
+</odoo>

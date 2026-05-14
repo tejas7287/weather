@@ -1,0 +1,13 @@
+<odoo>
+    <record id="action_weather_dashboard" model="ir.actions.act_window">
+        <field name="name">Weather Dashboard</field>
+        <field name="res_model">weather.dashboard</field>
+        <field name="view_mode">form</field>
+    </record>
+
+    <menuitem id="menu_weather_dashboard_root"
+              name="Weather"
+              action="action_weather_dashboard"
+              web_icon="weather,static/description/icon.png"
+              sequence="1"/>
+</odoo>
